@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <title>Exoplanet Exploration</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<div class="hero">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <nav class="navbar navbar-dark navbar-expand-lg">
+                    <a class="navbar-brand navbar-left">Exoplanet Exploration</a>
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                            data-target="#navMenu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="#calculations">Calculations</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#analysis">Explore dataset</a></li>
+                            <li class="nav-item">
+                                <form class="form-inline my-2 my-lg-0">
+                                    <input id="search_field" class="form-control mr-sm-2" type="search"
+                                           placeholder="Search"
+                                           aria-label="Search">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
+                                            class="fa fa-search"
+                                            aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div id="mainCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="carousel-caption d-block">
+                            <h5>There are 10<sup>24</sup> planets in the known Universe</h5>
+                            <p>And Earth is the only that supports life? Not likely! Join us on a quest to find
+                                life beyond our planet, to find ourselves a new home!</p>
+                        </div>
+                        <img class="d-block w-100" src="{{ url_for('static', filename='assets/slide1.jpg') }}"
+                             alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-caption d-block">
+                            <h5>So what are exoplanets?</h5>
+                            <p> Exoplanets are planets that are outside our solar system. Most exoplanets are not
+                                tightly bound to stars and hence they are actually wandering through space or
+                                loosely orbiting between stars.</p>
+                        </div>
+                        <img class="d-block w-100" src="{{ url_for('static', filename='assets/slide2.jpg') }}"
+                             alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-caption d-block">
+                            <h5>It's All About the Numbers</h5>
+                            <div class="row">
+                                <div class="col-4">
+                                    <h6 class="planet-count">3,862</h6>
+                                    <h6>CONFIRMED</h6>
+                                </div>
+                                <div class="col-4">
+
+                                    <h6 class="planet-count">2,898</h6>
+
+                                    <h6>NASA CANDIDATES</h6>
+                                </div>
+                                <div class="col-4">
+
+                                    <h6 class="planet-count">2,882</h6>
+
+                                    <h6>PLANETARY SYSTEMS</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="d-block w-100" src="{{ url_for('static', filename='assets/slide3.jpg') }}"
+                             alt="Third slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="calculations mt-4 container" id="calculations">
+    <h2 class="text-center">Calculations</h2>
+    <h3 class="text-left mt-4">Distance from Sun</h3>
+    <p>Since exoplanets are incredibly far away, their distance from the Sun can be approximated as their distance
+        from Earth</p>
+    <form name="DistanceForm">
+        <div class="form-inline">
+            <input type="text" class="form-control col-lg-4 col-md-6 col-sm-12" placeholder="Enter planet name"
+                   name="PlanetName">
+            <button type="submit" class="btn btn-success ml-md-2 mt-sm-3 mt-md-0" name='PlanetNameButton'>Find
+                distance
+            </button>
+        </div>
+    </form>
+    <div id="result-calc-distance"></div>
+    <h3 class="text-left mt-4">Position in orbit</h3>
+    <p>The exoplanet's current position in its orbit around the host star. Only some planets in the dataset had all
+        quantities required to compute this.</p>
+    <form>
+        <div class="form-inline">
+            <input type="radio" class="form-check-input" id="regular-planets" name="planet-choice" value="0"
+                   checked="checked">
+            <label class=" form-check-label" for="regular-planets">Calculate
+                for one of the planets present</label>
+        </div>
+        <div class="form-inline">
+            <input type="radio" class="form-check-input" id="other-planets" name="planet-choice" value="1">
+            <label class="form-check-label" for="other-planets">Calculate for other planets(any planet having a
+                host star)</label>
+        </div>
+    </form>
+    <div id="selected-form-type" name="selected-form-type"></div>
+    <div id="orbit-position-result" name="orbit-position-result"></div>
+
+    <h3 class="text-left mt-4">Orbital period</h3>
+    <p>Orbital period can be computed using the length of the planets semi major axis and host star's solar mass
+        using Keplers 3rd law</p>
+    <form class="container" name="PeriodForm">
+        <div class="row">
+            <input type="text" class="form-control col-lg-4 col-sm-12" placeholder="Semi major axis (AU)"
+                   name="semi-major-axis-period">
+            <input type="text" class="form-control col-lg-4 col-sm-12 ml-lg-2 mt-sm-2 mt-lg-0" name="star-solar-mass"
+                   placeholder="Host star solar mass">
+            <button type="submit" class="btn btn-success ml-lg-2 mt-sm-3 mt-lg-0" value="Find distance">Find period
+            </button>
+        </div>
+    </form>
+    <div id="orbital-period-result"></div>
+
+    <h3 class="text-left mt-4">Angle between planets</h3>
+    <p>Angle between two planets can be computed using their spherical co-ordinates.</p>
+    <form class="container" name="angleForm">
+        <div class="row">
+            <input type="text" class="form-control col-lg-4 col-sm-12" placeholder="RA for planet 1(HH MM SS)"
+                   name="ra-1">
+            <input type="text" class="form-control col-lg-4 col-sm-12 ml-lg-3 mt-sm-2 mt-lg-0"
+                   placeholder="RA for planet 2(HH MM SS)" name="ra-2">
+
+        </div>
+        <div class="row mt-2">
+            <input type="text" class="form-control col-lg-4 col-sm-12" placeholder="s" name="dec-1">
+            <input type="text" class="form-control col-lg-4 col-sm-12 ml-lg-3 mt-sm-2 mt-lg-0" placeholder=""
+                   name="dec-2">
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-success mt-2" value="Find angle">Find period</button>
+        </div>
+    </form>
+    <div id="angle-result"></div>
+    <h3 class="mt-4">Orphan planets</h3>
+    <p>Orphan planets are planets which don't have a host star. Despite having no source of external heat, some of
+        these planets could still harbor life. For such a planet to harbor life,</p>
+    <ol>
+        <li>Its radius should be atleast 3.5 times the radius of the Earth and it shouldn't not be gas giant</li>
+        <li>If it has 10 times or more water as the Earth, it can have support life even if its ~0.3 of the Earth's
+            mass
+        </li>
+    </ol>
+</div>
+<div class="analysis mt-5 container" id="analysis">
+    <div class="row">
+        <h2 class="col-12 text-center">Exploring the dataset</h2>
+    </div>
+    <div class="row">
+        <h3 class="text-left mt-4">Discovery method, planet mass and host star mass</h3>
+    </div>
+    <div class="row">
+        <p>Radial veloicty(RV) proved to the common method of discovering planets having large planetary mass.
+            Microlensing, seems to be the most viable method for discovering smaller planets.</p>
+        <p>A similar trend was seen with planets having large host stars. Radial veolocity was again the most
+            effective method for planets with massive host stars</p>
+        <img class="analysis-images col-lg-6 col-sm-12"
+             src="{{ url_for('static', filename='assets/massvsmethod.png') }}"/>
+        <img class="analysis-images col-lg-6 col-sm-12"
+             src="{{ url_for('static', filename='assets/slrmassvsmethod.png') }}"/>
+    </div>
+    <div class="row">
+        <h3 class="text-left mt-4">Microlensing rules when it comes to distance</h3>
+    </div>
+    <div class="row">
+        <p>When it comes to measuring planets at distance, it was observed that gravitational microlensing is the
+            most effective. Barring a few planets that were discovered through transit, almost all planets beyong
+            2000 parsecs were discovered using microlensing.</p>
+        <img class="analysis-images col-lg-6 col-sm-12"
+             src="{{ url_for('static', filename='assets/distvsmethod.png') }}"/>
+    </div>
+    <div class="row">
+        <h3 class="text-left mt-4">Frequency of discovery</h3>
+    </div>
+    <div class="row">
+        <p>The period between 2012 to 2015 saw the largest number of exoplanets discovered. Most exoplanets were
+            discovered in the 21st century itself.</p>
+        <img class="analysis-images col-lg-6 col-sm-12"
+             src="{{ url_for('static', filename='assets/freqvsyear.png') }}"/>
+    </div>
+    <footer class="page-footer font-small">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https:\\www.github.com/Aftaab99">Aftaab Zia</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+</div>
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tether.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+
+</html>
