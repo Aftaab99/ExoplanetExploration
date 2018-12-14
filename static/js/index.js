@@ -26,25 +26,25 @@ const otherPlanetsForm = `
         <div class="row mb-2">
             <input type="text" class="form-control col-md-5 col-sm-12" name="semi-major-axis" required="required"
                         placeholder="Semi major axis (AU)" data-error="Please enter a valid number">
-            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2" name="eccentricity" required="required"
+            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2 mt-md-0" name="eccentricity" required="required"
                         placeholder="Eccentricity" data-error="Please enter a valid number">
         </div>
         <div class="row mb-2">
             <input type="text" class="form-control col-md-5 col-sm-12" name="ascending-node" required="required"
                         placeholder="Ascending node longitude(degree)" data-error="Please enter a valid number">
-            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2" name="periastron" required="required"
+            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2 mt-md-0" name="periastron" required="required"
                         placeholder="Periastron(degree)" data-error="Please enter a valid number">
         </div>
         <div class="row mb-2">
             <input type="text" class="form-control col-md-5 col-sm-12" name="period" required="required"
                         placeholder="Orbital period(days)" data-error="Please enter a valid number">
-            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2" name="dates" required="required"
+            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2 mt-md-0" name="dates" required="required"
                         placeholder="Measurement date(DD/MM/YYYY)" data-error="Please enter a valid number">
         </div>
         <div class="row mb-3">
             <input type="text" class="form-control col-md-5 col-sm-12" name="mean-longitude-degrees" required="required"
                         placeholder="Mean longitude(degrees)" data-error="Please enter a valid number">
-            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2" name="inclination" required="required"
+            <input type="text" class="form-control col-md-5 col-sm-12 ml-md-5 mt-sm-2 mt-md-0" name="inclination" required="required"
                         placeholder="Inclination(degrees)" data-error="Please enter a valid number">
         </div>
         <center>
