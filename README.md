@@ -18,7 +18,7 @@ A flask website for exoplanet data analysis.
 	python main.py
 	
 #### Web demo
-[Demo](hackbenchers.herokuapp.com).
+[Demo](https://hackbenchers.herokuapp.com).
 
 The app was deployed using Heroku. As I'm using a free dyno, it can take upto 30min to boot at times as free dynos sleep after 30 min of inactivity.
 
