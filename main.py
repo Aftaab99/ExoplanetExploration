@@ -162,5 +162,5 @@ def validate_nan(x):
 		return x
 
 
-# if __name__ == '__main__':
-# 	app.run(debug=True)
+if __name__ == '__main__':
+	app.run(debug=True)
