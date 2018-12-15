@@ -99,7 +99,7 @@ def search_hints():
 	data = pd.read_csv(dataset_path)
 	res = []
 	for index, row in data.iterrows():
-		if (row['PlanetIdentifier'].lower()).startswith(query):
+		if (row['PlanetIdentifier'].lower()).startswith(query.lower()):
 			res.append(row['PlanetIdentifier'])
 	return jsonify(res)
 
@@ -162,5 +162,5 @@ def validate_nan(x):
 		return x
 
 
-if __name__ == '__main__':
-	app.run(debug=True)
+# if __name__ == '__main__':
+# 	app.run(debug=True)
