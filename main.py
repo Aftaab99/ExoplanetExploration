@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, jsonify
-import os, re
+import os
 from EstimateDistance import calc_position, calc_period, calc_angle
 import pandas as pd
 from datetime import datetime
+import numpy as np
 
 app = Flask(__name__)
 
@@ -92,15 +93,50 @@ def orbital_period():
 
 @app.route('/search_hints', methods=['GET'])
 def search_hints():
+	print('Request made')
 	query = request.args.get('query')
 	dataset_path = os.path.join(ASSETS_FOLDER, 'oec.csv')
 	data = pd.read_csv(dataset_path)
-	planet_names = data['PlanetIdentifier']
 	res = []
-	for index, row in planet_names.iterrows():
-		if re.match(row['PlanetIdentifier'], query):
-			res.append('PlanetIdentifier')
+	for index, row in data.iterrows():
+		if (row['PlanetIdentifier'].lower()).startswith(query):
+			res.append(row['PlanetIdentifier'])
 	return jsonify(res)
+
+
+@app.route('/search_results', methods=['GET'])
+def search_results_get():
+	return render_template('search.html')
+
+
+@app.route('/search_results', methods=['POST'])
+def search_results():
+	query = request.form.get('search-field')
+	dataset_path = os.path.join(ASSETS_FOLDER, 'oec.csv')
+	data = pd.read_csv(dataset_path)
+	for index, row in data.iterrows():
+		if (row['PlanetIdentifier'].lower()) == query.lower():
+			pn = row['PlanetIdentifier']
+			pt = row['TypeFlag']
+			pm = validate_nan(row['PlanetaryMassJpt'])
+			pr = validate_nan(row['RadiusJpt'])
+			pp = validate_nan(row['PeriodDays'])
+			pa = validate_nan(row['SemiMajorAxisAU'])
+			pe = validate_nan(row['Eccentricity'])
+			pk = validate_nan(row['SurfaceTempK'])
+
+			if pt == 0:
+				pt = 'Non binary(no known stellar binary companion)'
+			elif pt == 1:
+				pt = 'Circumbinary planet'
+			elif pt == 2:
+				pt = 'S-type binary'
+			else:
+				pt = 'Orphan planet(planet with no host star)'
+
+			return render_template('search.html', planet_name=pn, planet_type=pt, planet_mass=pm, planet_radius=pr,
+								   planet_period=pp, planet_sma=pa, planet_ecc=pe, planet_temp=pk)
+	return render_template('not_found.html')
 
 
 @app.route('/angle', methods=['POST'])
@@ -117,6 +153,13 @@ def angle():
 
 	theta = calc_angle(ra_1_d, ra_2_d, dec_1_d, dec_2_d)
 	return jsonify({'angle': theta})
+
+
+def validate_nan(x):
+	if np.isnan(x):
+		return 'Not present in dataset'
+	else:
+		return x
 
 
 # if __name__ == '__main__':

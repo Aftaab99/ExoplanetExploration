@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search results</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h3 class="mt-5 col-lg-12 text-center">Search results</h3>
+    </div>
+    <div class="row mt-4">
+        <h4 class="col-12">Planet name</h4>
+        <h6 id="PlanetIdentifier" class="mt-1 col-12">{{ planet_name }}</h6></div>
+    <div class="row mt-4">
+        <h4 class="col-12">Planet type</h4>
+        <h6 id="TypeFlag" class="mt-1 col-12">{{ planet_type }}</h6>
+    </div>
+    <div class="row mt-4">
+        <h4 class="col-12">Planets mass(in terms of mass of Jupyter)</h4>
+        <h6 id="PlanetaryMassJpt" class="mt-1 col-12">{{ planet_mass }}</h6></div>
+    <div class="row mt-4">
+        <h4 class="col-12">Radius(in terms of Jupiter's radius)</h4>
+        <h6 id="RadiusJpt" class="mt-1 col-12">{{ planet_radius }}</h6>
+    </div>
+    <div class="row mt-4">
+        <h4 class="col-12">Orbital period(days)</h4>
+        <h6 id="PeriodDays" class="mt-1 col-12">{{ planet_period }}</h6>
+    </div>
+    <div class="row mt-4">
+        <h4 class="col-12">Semi major axis length(AU)</h4>
+        <h6 id="SemiMajorAxisAU" class="mt-1 col-12">{{ planet_sma }}</h6>
+    </div>
+    <div class="row mt-4">
+        <h4 class="col-12">Eccentricity</h4>
+        <h6 id="Eccentricity" class="mt-1 col-12">{{ planet_ecc }}</h6>
+    </div>
+    <div class="row mt-4">
+        <h4 class="col-12">Surface temperature(K)</h4>
+        <h6 id="SurfaceTempK" class="mt-1 col-12">{{ planet_temp }}</h6>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

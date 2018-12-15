@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
     <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -29,11 +31,14 @@
                             <li class="nav-item"><a class="nav-link" href="#calculations">Calculations</a></li>
                             <li class="nav-item"><a class="nav-link" href="#analysis">Explore dataset</a></li>
                             <li class="nav-item">
-                                <form class="form-inline my-2 my-lg-0">
-                                    <input id="search_field" class="form-control mr-sm-2" type="search"
+                                <form autocomplete="off" class="form-inline my-2 my-lg-0 ui-widget"
+                                      action="/search_results" method="post" enctype="multipart/form-data">
+                                    <input id="search_field" class="form-control mr-sm-2 ui-autocomplete-input"
+                                           type="search" name="search-field"
                                            placeholder="Search"
                                            aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
+                                    <button class="btn btn-outline-success my-2 my-sm-0" name="search-button"
+                                            type="submit"><i
                                             class="fa fa-search"
                                             aria-hidden="true"></i>
                                     </button>
@@ -234,10 +239,25 @@
 
     </footer>
 </div>
+<style>
+    .ui-autocomplete {
+            max-height: 250px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+        }
+
+</style>
+
 
 <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tether.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous"></script>
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 

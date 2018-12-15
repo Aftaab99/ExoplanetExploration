@@ -57,7 +57,6 @@ $('#selected-form-type').html(planetsPresentForm);
 $("form[name='planetsPresentForm']").on('submit', function(event){
             event.preventDefault();
             let planetName = $(this).find('select').val();
-            console.log(planetName);
             $.ajax({
                 data:{
                         PlanetName: planetName
@@ -83,14 +82,12 @@ $("form[name='planetsPresentForm']").on('submit', function(event){
 var form_type;
 $('input[name="planet-choice"]').change(function(){
     form_type = $('input[name="planet-choice"]:checked').val();
-    console.log(form_type);
     if(form_type=="0"){
         $('#selected-form-type').html(planetsPresentForm);
 
         $("form[name='planetsPresentForm']").on('submit', function(event){
             event.preventDefault();
             let planetName = $(this).find('select').val();
-            console.log(planetName);
             $.ajax({
                 data:{
                         PlanetName: planetName
@@ -118,7 +115,6 @@ $('input[name="planet-choice"]').change(function(){
         $('#selected-form-type').html(otherPlanetsForm);
         $("form[name='otherPlanetsForm']").on('submit', function(event){
             event.preventDefault();
-            console.log('Entering');
             var inputs_valid=false;
 
             var a=$("input[name='semi-major-axis']").val();
@@ -133,7 +129,6 @@ $('input[name="planet-choice"]').change(function(){
             if(isNumeric(a) && isNumeric(ecc) && isNumeric(asc_long) && isNumeric(inc)
                 && isNumeric(arg_per) && isNumeric(period) && isNumeric(mean_long) && validateDate(dates)){
                 //Send the post request
-                console.log('Valid');
 
                 $.ajax({
                     data:{
@@ -149,7 +144,6 @@ $('input[name="planet-choice"]').change(function(){
                     type: 'POST',
                     url: '/orbit_position_other'
                 }).done(function(result){
-                    console.log(result)
                     if(result.error==0){
                         let radius_vector = result.radius_vector;
                         let ra = result.RA;
@@ -170,7 +164,6 @@ $('input[name="planet-choice"]').change(function(){
                 //Invalid input
                 let res = `<h6 class="mt-2 text-danger">Invalid inputs</h6>`;
                 $('#orbit-position-result').html(res);
-                console.log('Invalid');
             }
 
         });
@@ -189,7 +182,6 @@ $("form[name='DistanceForm']").on('submit', function(event){
 
     }).done(function(data){
         if(data.error == 0){
-            console.log('No error!');
             let distance = data.distance;
             let res = `<h6 class="mt-2">Estimated distance=${distance} parsecs</h6>`
             $('#result-calc-distance').html(res);
@@ -224,7 +216,6 @@ $('form[name="PeriodForm"]').on('submit', function(event){
     else{
         let res = `<h6 class="mt-2 text-danger">Invalid inputs</h6>`;
         $('#orbital-period-result').html(res);
-        console.log('Invalid');
 
     }
 });
@@ -300,3 +291,26 @@ function isNumeric(num){
     return !isNaN(num)
 }
 
+$('input[name="search-field"]').autocomplete({
+    source: function(request, response){
+        console.log('Working!');
+        $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        type: 'GET',
+        data: {'query': $('input[name="search-field"]').val()},
+        url: '/search_hints',
+
+        }).done(function(data){
+            response(data);
+
+            console.log(data)
+        });
+    },
+    _renderItem: function( ul, item ) {
+      return $( "<li class='ui-autocomplete'>" )
+        .attr( "data-value", item.value )
+        .append( item.label )
+        .appendTo( ul );
+}
+});
