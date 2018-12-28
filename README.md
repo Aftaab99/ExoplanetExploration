@@ -1,16 +1,5 @@
 ## Exoplanet Exploration(Hackbenchers2.0)
-A flask website for exoplanet data analysis.
-
-### Frameworks/Libraries used
-1. Flask
-2. Bootstrap 4
-3. Jquery
-4. Sass
-5. Gulp
-6. Python data analysis libraries(pandas, seaborn, matplotlib)
-7. Gunicorn as WSGI web server
-
-### 
+A flask website for exoplanet data analysis. Made for Hackbenchers 2.0 organised by HackerEarth.
 
 ### Testing
 #### Starting dev server
