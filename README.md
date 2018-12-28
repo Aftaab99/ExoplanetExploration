@@ -9,6 +9,6 @@ A flask website for exoplanet data analysis. Made for Hackbenchers 2.0 organised
 #### Web demo
 [Demo](https://hackbenchers.herokuapp.com).
 
-The app was deployed using Heroku. As I'm using a free dyno, it can take upto 30min to boot at times as free dynos sleep after 30 min of inactivity.
+The app was deployed using Heroku. As I'm using a free dyno, it can take upto 15s to boot at times as free dynos sleep after 30 min of inactivity.
 
 
